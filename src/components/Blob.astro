@@ -1,29 +1,18 @@
 ---
 export interface Props {
-	top: string;
-	left: string;
-	rotate: string;
+	top?: string;
+	left?: string;
+	rotate?: string;
 }
 
-let { top, left, rotate} = Astro.props;
+let {top = "random", left = "random", rotate = "random"} = Astro.props;
 
-if (top === "random") {
-	top = `${(Math.floor(Math.random() * 130) - 45)}vh`;
-}
-
-if (left === "random") {
-	left = `${Math.floor(Math.random() * 140) - 50}vw`;
-}
-
-if (rotate === "random") {
-	rotate = `${Math.random() * 360}deg`;
-}
-
-const negative = left.includes("-");
+const randomID = crypto.randomUUID();
 ---
 
-<div class:list={["blob-container", { "is-negative": negative }]}>
+<div id={randomID} class:list={["blob-container"]} data-top={top} data-left={left} data-rotate={rotate}>
 	<svg
+		id={randomID + "_blob"}
 		class="blob-gradient"
 		class="blob"
 		viewBox="0 0 400 400"
@@ -56,13 +45,48 @@ const negative = left.includes("-");
 	<div class="blur-filter"></div>
 
 	<script>
+		const blobContainers = document.querySelectorAll(".blob-container");
+
+		/**
+		 * Set the top, left and rotate value to the SVG
+		 */
+		blobContainers.forEach(blobContainer => {
+			const blobSVG = document.getElementById(blobContainer.id + "_blob");
+			const top = (blobContainer as HTMLElement).dataset.top;
+			const left = (blobContainer as HTMLElement).dataset.left;
+			const rotate = (blobContainer as HTMLElement).dataset.rotate; 
+
+			if (blobSVG != null) {
+				if (top === "random") {
+					blobSVG.style.top = `${(Math.floor(Math.random() * 130) - 45)}vh`;
+				} else {
+					blobSVG.style.top = (top as string);
+				}
+
+				if (left === "random") {
+					const random = `${Math.floor(Math.random() * 140) - 50}vw`;
+					blobSVG.style.left = random;
+
+					if (random.includes("-")) blobContainer.classList.add("is-negative");
+				} else {
+					blobSVG.style.left = (left as string);
+				}
+
+				if (rotate === "random") {
+					blobSVG.style.rotate = `${Math.random() * 360}deg`;
+				} else {
+					blobSVG.style.rotate = (rotate as string);
+				}
+			}
+			
+		});
+
 		/**
 		 * If not on firefox or safari, remove the blur filter
 		 *
 		 * On Firefor and Safari, the .blur-filter is used to create a backdrop-filter that prevent visual glitches on SVGs with blur filter
 		 * On other browsers, the blur filter is removed to prevent performance issues
 		 */
-		const blobContainers = document.querySelectorAll(".blob-container");
 		const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 		const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
@@ -74,7 +98,7 @@ const negative = left.includes("-");
 	</script>
 </div>
 
-<style lang="scss" define:vars={{ top, left, rotate }}>
+<style lang="scss">
 	.blob-container {
 		position: absolute;
 		top: 0;

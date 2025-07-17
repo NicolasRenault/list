@@ -146,10 +146,7 @@ const randomDeg = Math.floor(Math.random() * 180) + "deg";
 			.description {
 				margin: 0.5rem 0;
 				font-size: 1.2rem;
-				// text-overflow: ellipsis;
-				// white-space: nowrap;
-				// overflow: hidden;
-				// line-height: normal;
+				line-height: 0.95;
 			}
 
 			.main-link {
@@ -169,6 +166,14 @@ const randomDeg = Math.floor(Math.random() * 180) + "deg";
 		}
 	}
 
+	// @container card-container (width < 580px) {
+	// 	article .card-container {
+	// 		.description {
+	// 			margin: 0;
+	// 		}
+	// 	}
+	// }
+
 	@container card-container (width < 360px) {
 		article .card-container {
 			height: var(--heigth-small);
@@ -176,6 +181,17 @@ const randomDeg = Math.floor(Math.random() * 180) + "deg";
 			.border-gradient {
 				.titles  {
 					grid-template-columns: 100%;
+					margin: 0;
+				}
+
+				.description {
+					max-height: 37px;
+
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			}
 		}

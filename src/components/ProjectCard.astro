@@ -1,0 +1,183 @@
+---
+// import Icon from "astro-icon";
+import { Image } from "astro:assets";
+
+export interface Props {
+	title: string;
+	icon: string;
+	url: string;
+	description: string;
+}
+
+const { title, icon, url, description} = Astro.props;
+const randomDeg = Math.floor(Math.random() * 180) + "deg";
+---
+
+<article id={title}>
+	<div class="card-container">
+		<div
+			class:list={[
+				"border-gradient",
+			]}
+		>
+			<div>
+				<div class:list={["titles", { "has-icon": icon }]}>
+					{icon && <Image src={icon} alt={`${title} icon`} width="32" height="32" />}
+					<h3>{title}</h3>
+				</div>
+
+				{description && <p class="description">{description}</p>}
+
+				<a
+					href={url}
+					title={title + " | " + description}
+					aria-label={title + " | " + description}
+					class="main-link"
+					target="_blank"
+				>
+					<!-- Need to extract the main link and display it on top of the text to avoid weird Astro rendering -->
+					<!-- See https://github.com/withastro/astro/issues/4864 -->
+				</a>
+			</div>
+		</div>
+	</div>
+</article>
+
+<style lang="scss" define:vars={{ randomDeg }}>
+	article {
+		width: 100%;
+		container-type: inline-size;
+		container-name: card-container;
+
+		letter-spacing: 0px;
+
+		&:target {
+			.border-gradient {
+				outline: var(--dashed-outline);
+			}
+		}
+	}
+	.card-container {
+		--gap: 1rem;
+		--width: 650px;
+		--width-small: 370px;
+		--heigth: 120px;
+		--heigth-small: 160px;
+
+		--accent-gradient: linear-gradient(
+			var(--randomDeg),
+			var(--secondary-rgb),
+			var(--tertiary-rgb) 50%,
+			var(--text-rgb) 60%,
+			var(--tertiary-rgb) 70%,
+			var(--secondary-rgb)
+		);
+
+		display: block;
+		box-sizing: border-box;
+		background-image: var(--accent-gradient);
+		border-radius: 13px;
+		margin: var(--gap);
+		padding: 3px;
+		width: calc(100% - (var(--gap) * 2));
+		height: var(--heigth);
+
+		color: var(--text-rgb);
+		font-size: 1.2rem;
+
+		transition: padding 0.2s ease;
+
+		* {
+			box-sizing: border-box;
+		}
+
+		.border-gradient {
+			position: relative;
+			padding: var(--gap);
+			background-color: rgba(var(--primary-light), 0.9);
+			backdrop-filter: blur(20px);
+			border-radius: 10px;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+
+			transition: outline-width 0.1s ease;
+
+			a {
+				color: var(--text-rgb);
+				text-decoration: none;
+			}
+			img,
+			svg {
+				color: var(--text-rgb);
+				aspect-ratio: 1/1;
+			}
+
+			.titles {
+				position: relative;
+				display: grid;
+				grid-template-columns: 100%;
+				gap: var(--gap);
+				align-items: center;
+				margin-bottom: var(--gap);
+				width: 100%;
+
+				&.has-icon {
+					grid-template-columns: 32px 100%;
+				}
+
+				* {
+					margin: 0;
+				}
+
+				h3 {
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					min-height: 27px;
+
+					font-size: 1.45rem;
+					font-weight: bolder;
+					text-decoration: underline 2px var(--secondary-rgb);
+					text-underline-offset: 0.3rem;
+				}
+			}
+
+			.description {
+				margin: 0.5rem 0;
+				font-size: 1.2rem;
+				// text-overflow: ellipsis;
+				// white-space: nowrap;
+				// overflow: hidden;
+				// line-height: normal;
+			}
+
+			.main-link {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+			&:has(.main-link:focus-visible) {
+				outline: 4px solid var(--text-rgb);
+			}
+		}
+
+		&:hover {
+			transform: matrix(1, 0, 0, 1, 0, -1);
+		}
+	}
+
+	@container card-container (width < 360px) {
+		article .card-container {
+			height: var(--heigth-small);
+
+			.border-gradient {
+				.titles  {
+					grid-template-columns: 100%;
+				}
+			}
+		}
+	}
+</style>

@@ -1,0 +1,97 @@
+@font-face {
+  font-family: Poppins;
+  src: url("/fonts/Poppins-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --primary: 11, 11, 5;
+  --primary-light: 22, 23, 17;
+  --secondary: 17, 221, 0;
+  --secondary-light: 23, 255, 0;
+  --secondary-dark: 12, 53, 24;
+  --tertiary: 139, 84, 271;
+  --tertiary-light: 184, 98, 255;
+  --tertiary-dark: 89, 54, 140;
+  --text: 239, 254, 244;
+  --text-gray: 200, 200, 200;
+  --text-dark-gray: 100, 100, 100;
+  --primary-rgb: rgb(var(--primary));
+  --primary-light-rgb: rgb(var(--primary-light));
+  --secondary-rgb: rgb(var(--secondary));
+  --secondary-light-rgb: rgb(var(--secondary-light));
+  --secondary-dark-rgb: rgb(var(--secondary-dark));
+  --tertiary-rgb: rgb(var(--tertiary));
+  --tertiary-light-rgb: rgb(var(--tertiary-light));
+  --tertiary-dark-rgb: rgb(var(--tertiary-dark));
+  --text-rgb: rgb(var(--text));
+  --text-gray-rgb: rgb(var(--text-gray));
+  --text-dark-gray-rgb: rgb(var(--text-dark-gray));
+}
+
+html {
+  font-family: Poppins, sans-serif;
+  color: var(--text-rgb);
+  background-color: var(--primary-rgb);
+  scroll-behavior: smooth;
+
+  //Firefox scrollbar
+  scrollbar-color: rgba(var(--text), 0.3) var(--primary-light-rgb);
+  scrollbar-width: 10px;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+
+  letter-spacing: -1.5px;
+}
+
+#main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+
+	padding-top: 5%;
+
+	main {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+* {
+  ::selection {
+    background-color: var(--secondary-rgb);
+    color: var(--text-rgb);
+  }
+
+  :focus-visible {
+    color: var(--text-rgb) !important;
+    border: none;
+    outline: dashed 3px var(--secondary-rgb);
+    font-weight: bolder;
+  }
+}
+
+//Webit scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar {
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-light-rgb);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--text), 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--secondary), 0.3);
+}

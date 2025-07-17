@@ -1,0 +1,32 @@
+[
+    {
+        "title": "nicolasrenault.com",
+        "description": "My personal website.",
+        "icon": "https://www.cdn.nicolasrenault.com/logo/NR_Logo_dark_mode.svg",
+        "url": "https://nicolasrenault.com"
+    },
+    {
+        "title": "GitHub",
+        "description": "Find all my projects and codes.",
+        "icon": "https://cdn.nicolasrenault.com/static/github.png",
+        "url": "https://github.com/nicolasrenault"
+    },
+    {
+        "title": "LinkedIn",
+        "description": "Let's connect!",
+        "icon": "https://cdn.nicolasrenault.com/static/linkedin.ico",
+        "url": "https://www.linkedin.com/in/nicolas-renault-6388191a5/"
+    },
+    {
+        "title": "Contact me",
+        "description": "Feel free to reach if you have any questions.",
+        "icon": "https://cdn.nicolasrenault.com/static/gmail.ico",
+        "url": "mailto:contact.nicolasrenault@gmail.com?subject=Hello%20there!&body=Hey,"
+    },
+    {
+        "title": "Strava",
+        "description": "Follow my cycling adventures.",
+        "icon": "https://cdn.nicolasrenault.com/static/strava.png",
+        "url": "https://www.strava.com/athletes/131396980"
+    }
+]

@@ -1,0 +1,19 @@
+---
+import "@styles/normalize.css";
+import "@styles/global.scss";
+import BaseHead from "@components/BaseHead.astro";
+import GrainyFilter from "@components/GrainyFilter.astro";
+import Blob from "@components/Blob.astro";
+---
+
+<!DOCTYPE html>
+<html>
+	<BaseHead />
+	<body>
+		<section id="main">
+			<slot />
+		</section>
+		<Blob top="random" left="random" rotate="random" />
+		<GrainyFilter />
+	</body>
+</html>

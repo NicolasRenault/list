@@ -1,0 +1,36 @@
+---
+const finalTitle = "Nicolas Renault";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site).href;
+---
+
+<head>
+	<meta charset="UTF-8" />
+	<title>{finalTitle}</title>
+	<meta name="viewport" content="width=device-width" />
+	<meta name="author" content="Nicolas Renault" />
+	<meta name="description" content="Nicolas Renault links" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={canonicalURL} />
+	<meta property="og:title" content={finalTitle} />
+	<meta property="og:description" content="Nicolas Renault links" />
+	<meta property="og:image" content={ogImageURL} />
+	<meta name="generator" content={Astro.generator} />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href={canonicalURL} />
+
+	<link
+		rel="icon"
+		href="https://cdn.nicolasrenault.com/logo/NR_logo_light_96x96.ico"
+		media="(prefers-color-scheme: light)"
+	/>
+	<link
+		rel="icon"
+		href="https://cdn.nicolasrenault.com/logo/NR_logo_dark_96x96.ico"
+		media="(prefers-color-scheme: dark)"
+	/>
+
+	<script defer src="https://cdn.nicolasrenault.com/logo/NR_Logo.js"></script>
+	<script defer data-domain="links.nicolasrenault.com" src="https://plausible.io/js/script.js"></script>
+</head>
